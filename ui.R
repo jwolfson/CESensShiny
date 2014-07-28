@@ -39,7 +39,7 @@ shinyUI(pageWithSidebar(
     strong(textOutput("OOB")),
     tags$hr(),
     checkboxInput("boot","Compute 95% Bootstrap CIs",value=FALSE),
-    numericInput("n.boot","Number of bootstrap resamples (min. 250)",value=500,min=250),
+    numericInput("nboot","Number of bootstrap resamples (min. 250)",value=500,min=250),
     tags$hr(),
     sliderInput("yl","Display range of CE plot",-1,1,c(-1,1),step=0.05)
   ),

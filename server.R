@@ -10,10 +10,11 @@ shinyServer(function(input, output) {
       dat <- read.csv(inFile$datapath,header=TRUE)
     }
     else {
-      if(!is.null(input$dataset)) {
+      if(is.null(input$dataset)) {
         thedataset <- "fake"
-      } else {  thedataset <- input$datset}
-      load(paste0("C:/Users/Julian/Google Drive/code library/CESensShiny/data/",thedataset,".Rdata")) 
+      } else {  thedataset <- input$dataset}
+      load(paste0("data/",thedataset,".RData")) 
+      #load(paste0(thedataset,".RData")) 
       dat <- get(thedataset)  
     }
     dat })
@@ -145,7 +146,6 @@ shinyServer(function(input, output) {
     gam.shape <- shift.mu^2/scale.sd^2
     gam.rate <- shift.mu/scale.sd^2
     
-    
     switch(input$dist, 
       "norm" = dnorm(x.pts(),mean=shift.mu,sd=scale.sd),
       "gamma" = dgamma(x.pts(),shape=gam.shape,rate=gam.rate),
@@ -178,7 +178,7 @@ shinyServer(function(input, output) {
          xlab="S(1)",ylab="Causal Effect",ylim=input$yl)
     abline(h=0)
     if(input$boot) { 
-      boot.CEs <- doBoot(data(),input$n.boot)
+      boot.CEs <- doBoot(data(),input$nboot)
       #boot.SEs <- apply(do.call(rbind,boot.CEs),2,sd,na.rm=TRUE)
       #boot.L <- CE - 1.96*boot.SEs
       #boot.U <- CE + 1.96*boot.SEs
