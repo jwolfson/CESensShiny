@@ -1,6 +1,6 @@
 library(shiny)
 
-# Define server logic
+# Define the server logic
 shinyServer(function(input, output) {
   
   ## Read in the file
