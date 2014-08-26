@@ -64,7 +64,7 @@ shinyServer(function(input, output) {
   x.pts <- reactive( seq(min(S1()),max(S1()),length.out=100) )
   
   doBoot <- function(data,R) {
-    allCEs <- sapply(1:R,function(i) {
+    allCEs <- lapply(1:R,function(i) {
       rows <- sample(1:nrow(data),nrow(data),replace=TRUE)
       dat <- data.frame(data[rows,])
       S1 <- dat$S[dat$Z==1]
